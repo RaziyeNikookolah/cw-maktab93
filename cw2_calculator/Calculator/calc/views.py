@@ -9,9 +9,8 @@ def index(request):
 def result(request):
     result_ = 0
     operator = request.GET['operator']
-    num1 = request.GET['num1']
-    num2 = request.GET['num2']
-    print(num1, num2, operator)
+    num1 = int(request.GET['num1'])
+    num2 = int(request.GET['num2'])
     if operator == "add":
         result_ = num1 + num2
     elif operator == "subtract":
