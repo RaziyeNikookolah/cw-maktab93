@@ -30,3 +30,14 @@ class Memeber(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
+
+
+
+class BorrowedBook (models.Model):
+    member = models.ForeignKey(Memeber,on_delete=models.RESTRICT)
+    book = models.ForeignKey(Book, on_delete=models.RESTRICT)
+    borrowed_date = models.DateField()
+    return_date = models.DateField(null=True,blank=True)
+    deadline_date = models.DateField()
+    def __str__(self):
+        return f'{self.member} - {self.book}'
