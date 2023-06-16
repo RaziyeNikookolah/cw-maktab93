@@ -5,6 +5,13 @@
     <title>Title</title>
 </head>
 <body>
+    <form method="post" action="">
+        {% csrf_token %}
+        <label>
+            <textarea name="html_input" rows="10" cols="50" placeholder="Enter html text to parse.."></textarea>
+        </label>
+        <input type="submit" value="Try to Parse it ;) "/>
 
+    </form>
 </body>
 </html>
