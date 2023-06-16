@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Calculator</title>
-</head>
-<body>
-    <form method="post" action="">
+{% extends "base.html" %}
+{% block title %}CALCULATOR{% endblock %}
+{% block content %}
+    <form method="get" action="/result/">
         <label>
-            <input type="text" placeholder="Enter Number"/>
+            <input type="text" placeholder="Enter Number" name="num1"/>
         </label>
         <label>
-            <input type="text" placeholder="Enter Number"/>
+            <input type="text" placeholder="Enter Number" name="num2" />
         </label>
         <label for="operator"></label>
         <select name="operator" id="operator">
@@ -22,5 +18,4 @@
         <input type="submit" value="Calculate"/>
 
     </form>
-</body>
-</html>
+{% endblock %}
