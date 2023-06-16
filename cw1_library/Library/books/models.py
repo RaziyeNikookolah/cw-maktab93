@@ -13,7 +13,6 @@ class Book(models.Model):
     authors = models.ManyToManyField(Author)
     description = models.TextField()
     isbn = models.CharField(max_length=13)
-    
 
 
     def __str__(self):
