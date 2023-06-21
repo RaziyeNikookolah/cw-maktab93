@@ -23,6 +23,12 @@ class Teacher(models.Model):
 
 
 
+class Class(models.Model):
+    name=models.CharField("name of the class(e.g.,\"Grade 10\")",required=True,max_length=100)
+    section=models.CharField("section of the class(e.g.,\"A\", \"B\")",required=True)
+    start_time=models.TimeField("start time of the class",required=True)
+    end_time=models.TimeField("end time of the class",required=True)
+
 
 class Subject(models.Model):
     ...
