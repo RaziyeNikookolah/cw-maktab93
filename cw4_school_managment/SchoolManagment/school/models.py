@@ -40,12 +40,13 @@ class Subject(models.Model):
 class Exam(models.Model):
     name=models.CharField("name of the exam",required=True,max_length=100)
     date=models.DateField("date of the exam",required=True)
-    exam_class=models.ForeignKey("class for which the exam is conducted",required=True)
+    exam_class=models.ForeignKey(Class,on_delete=models.CASCADE,required=True)
 
 
 class Result(models.Model):
-    ...
-
+    exam=models.ForeignKey(Exam,on_delete=models.CASCADE,required=True)
+    student=models.ForeignKey(Student,on_delete=models.CASCADE,required=True)
+    marks=models.IntegerField("marks obtained by the student")
 
 class Attendance(models.Model):
     ...
