@@ -1,6 +1,6 @@
 from factory import Faker, SubFactory, LazyAttribute
 from factory.django import DjangoModelFactory
-from faker.providers import person, misc
+from faker.providers import person, misc, date_time, lorem
 
 from .models import Student, Address, Teacher, Subject, Exam, Notice, Assignment, LibraryBook, Attendance, Class, Result
 
@@ -51,6 +51,11 @@ class SubjectFactory(DjangoModelFactory):
 class ClassFactory(DjangoModelFactory):
     class Meta:
         model = Class
+    name = Faker('sentence', nb_words=3, variable_nb_words=True, ext_word_list=None, provider=lorem)
+    section = Faker('random_element', elements=["A", "B"], provider=misc)
+    start_time = Faker('time_object', start_datetime=None, end_datetime=None, tzinfo=None, provider=date_time)
+    end_time = Faker('time_object', start_datetime=start_time, end_datetime=None, tzinfo=None, provider=date_time)
+    teacher = SubFactory(lambda: TeacherFactory())
 
 
 class ExamFactory(DjangoModelFactory):
