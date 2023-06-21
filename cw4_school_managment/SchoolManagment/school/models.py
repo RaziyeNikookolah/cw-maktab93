@@ -12,10 +12,21 @@ class Student(models.Model):
     address = models.TextField("the address of the student", required=True)
     email = models.EmailField("email address of the student", required=True, unique=True)
     teacher = models.ForeignKey("Teacher", on_delete=models.CASCADE, related_name="students")
-    student_class = models.ForeignKey("Class", on_delete=models.CASCADE, related_name="student", unique=True)
+    _class = models.ForeignKey("Class", on_delete=models.CASCADE, related_name="student", unique=True)
 
     def __str__(self):
         return f'{self.name} {self.roll_number}'
+
+
+class Address(models.Model):
+    street = models.CharField("street", max_length=50)
+    city = models.CharField("city", max_length=50)
+    state = models.CharField("state", max_length=50)
+    zip_code = models.CharField("zip code", max_length=10)
+    country = models.CharField("country", max_length=50)
+
+    def __str__(self):
+        return f'{self.city}'
 
 
 class Teacher(models.Model):
