@@ -28,3 +28,12 @@ class AddressFactory(DjangoModelFactory):
     zip_code = Faker('zip_code')
     country = Faker('country')
 
+
+class TeacherFactory(DjangoModelFactory):
+    name = Faker('first_name')
+    # subject = models.CharField("the subject taught by the teacher", required=True, max_length=100)
+    subject = SubFactory(lambda: SubjectFactory())
+    date_of_birth = Faker('date_of_birth', minimum_age=18, maximum_age=65, provider=person)
+    gender = Faker('random_element', elements=["F", "M"], provider=misc)
+    address = SubFactory(lambda: AddressFactory())
+    email = LazyAttribute(lambda o: '%s@example.com' % o.name)
