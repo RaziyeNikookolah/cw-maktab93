@@ -50,12 +50,14 @@ class Result(models.Model):
 class Attendance(models.Model):
     date = models.DateField("date for whitch the attendance is recorded", required=True)
     student = models.ForeignKey(Student, "student whose attendance is recorded", on_delete=models.CASCADE())
-    status = models.CharField("attendance status",choices=ATTENDANCE_STATUS)
-
+    status = models.CharField("attendance status", choices=ATTENDANCE_STATUS)
 
 
 class Assignment(models.Model):
-    ...
+    title=models.CharField("title of the assignment",required=True,max_length=100)
+    description=models.TextField("description/instructions for the assignment",required=True)
+    due_date=models.DateField("due date for the assignment",required=True)
+    subject=models.ForeignKey(Subject,"subject for which the assignment is given",required=True)
 
 
 class Notice(models.Model):
