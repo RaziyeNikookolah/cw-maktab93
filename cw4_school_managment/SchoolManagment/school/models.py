@@ -54,18 +54,20 @@ class Attendance(models.Model):
 
 
 class Assignment(models.Model):
-    title=models.CharField("title of the assignment",required=True,max_length=100)
-    description=models.TextField("description/instructions for the assignment",required=True)
-    due_date=models.DateField("due date for the assignment",required=True)
-    subject=models.ForeignKey(Subject,"subject for which the assignment is given",required=True)
+    title = models.CharField("title of the assignment", required=True, max_length=100)
+    description = models.TextField("description/instructions for the assignment", required=True)
+    due_date = models.DateField("due date for the assignment", required=True)
+    subject = models.ForeignKey(Subject, "subject for which the assignment is given", required=True)
 
 
 class Notice(models.Model):
-    title=models.CharField("title of the notice",required=True,max_length=100)
-    description=models.TextField("description/details of the notice",required=True)
-    date=models.DateField("date on which the notice is posted",required=True)
-
+    title = models.CharField("title of the notice", required=True, max_length=100)
+    description = models.TextField("description/details of the notice", required=True)
+    date = models.DateField("date on which the notice is posted", required=True)
 
 
 class LibraryBook(models.Model):
-    ...
+    title = models.CharField("title of the book", required=True, max_length=100)
+    author = models.CharField("author of the book", required=True, max_length=100)
+    publication_date = models.DateField(" publication date of the book", required=True)
+    availability_status = models.BooleanField("availability status of the book")
