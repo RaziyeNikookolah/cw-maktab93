@@ -31,12 +31,14 @@ class Class(models.Model):
 
 
 class Subject(models.Model):
-    ...
+    name=models.CharField("name of the subject",required=True,max_length=100)
+    code=models.CharField("unique code for the subject",required=True,max_length=10)
+
+
 
 
 class Exam(models.Model):
     ...
-
 
 class Result(models.Model):
     ...
