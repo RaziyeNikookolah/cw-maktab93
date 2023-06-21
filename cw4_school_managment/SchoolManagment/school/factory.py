@@ -1,7 +1,8 @@
 from factory import Faker, SubFactory, LazyAttribute
 from factory.django import DjangoModelFactory
 from faker.providers import person, misc
-from .models import Student, Address
+
+from .models import Student, Address, Teacher, Subject, Exam, Notice, Assignment, LibraryBook, Attendance, Class, Result
 
 
 class StudentFactory(DjangoModelFactory):
@@ -30,6 +31,9 @@ class AddressFactory(DjangoModelFactory):
 
 
 class TeacherFactory(DjangoModelFactory):
+    class Meta:
+        model = Teacher
+
     name = Faker('first_name')
     # subject = models.CharField("the subject taught by the teacher", required=True, max_length=100)
     subject = SubFactory(lambda: SubjectFactory())
@@ -37,3 +41,43 @@ class TeacherFactory(DjangoModelFactory):
     gender = Faker('random_element', elements=["F", "M"], provider=misc)
     address = SubFactory(lambda: AddressFactory())
     email = LazyAttribute(lambda o: '%s@example.com' % o.name)
+
+
+class SubjectFactory(DjangoModelFactory):
+    class Meta:
+        model = Subject
+
+
+class ClassFactory(DjangoModelFactory):
+    class Meta:
+        model = Class
+
+
+class ExamFactory(DjangoModelFactory):
+    class Meta:
+        model = Exam
+
+
+class ResultFactory(DjangoModelFactory):
+    class Meta:
+        model = Result
+
+
+class AttendanceFactory(DjangoModelFactory):
+    class Meta:
+        model = Attendance
+
+
+class AssignmentFactory(DjangoModelFactory):
+    class Meta:
+        model = Assignment
+
+
+class NoticeFactory(DjangoModelFactory):
+    class Meta:
+        model = Notice
+
+
+class LibraryBookFactory(DjangoModelFactory):
+    class Meta:
+        model = LibraryBook
