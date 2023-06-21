@@ -38,7 +38,10 @@ class Subject(models.Model):
 
 
 class Exam(models.Model):
-    ...
+    name=models.CharField("name of the exam",required=True,max_length=100)
+    date=models.DateField("date of the exam",required=True)
+    exam_class=models.ForeignKey("class for which the exam is conducted",required=True)
+
 
 class Result(models.Model):
     ...
