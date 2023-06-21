@@ -11,7 +11,8 @@ class Student(models.Model):
     gender = models.CharField("gender of the student", choices=GENDER)
     address = models.TextField("the address of the student", required=True)
     email = models.EmailField("email address of the student", required=True, unique=True)
-    # teacher = models.ForeignKey("Teacher", on_delete=models.CASCADE)
+    teacher = models.ForeignKey("Teacher", on_delete=models.CASCADE,related_name="students")
+    student_class=models.ForeignKey("Class",on_delete=models.CASCADE,related_name="student",unique=True)
 
 
 class Teacher(models.Model):
@@ -28,11 +29,13 @@ class Class(models.Model):
     section = models.CharField("section of the class(e.g.,\"A\", \"B\")", required=True)
     start_time = models.TimeField("start time of the class", required=True)
     end_time = models.TimeField("end time of the class", required=True)
+    teacher=models.ForeignKey("Teacher",on_delete=models.CASCADE,related_name="class",unique=True)
 
 
 class Subject(models.Model):
     name = models.CharField("name of the subject", required=True, max_length=100)
     code = models.CharField("unique code for the subject", required=True, max_length=10)
+    teacher=models.ForeignKey("Teacher",on_delete=models.CASCADE,related_name="subjects")
 
 
 class Exam(models.Model):
