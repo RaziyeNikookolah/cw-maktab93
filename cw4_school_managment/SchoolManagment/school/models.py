@@ -61,7 +61,10 @@ class Assignment(models.Model):
 
 
 class Notice(models.Model):
-    ...
+    title=models.CharField("title of the notice",required=True,max_length=100)
+    description=models.TextField("description/details of the notice",required=True)
+    date=models.DateField("date on which the notice is posted",required=True)
+
 
 
 class LibraryBook(models.Model):
