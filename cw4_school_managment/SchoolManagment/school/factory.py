@@ -18,4 +18,13 @@ class StudentFactory(DjangoModelFactory):
     _class = SubFactory(lambda: ClassFactory())
 
 
+class AddressFactory(DjangoModelFactory):
+    class Meta:
+        model = Address
+
+    street = Faker('street_address')
+    city = Faker('city')
+    state = Faker('state_abbr')
+    zip_code = Faker('zip_code')
+    country = Faker('country')
 
