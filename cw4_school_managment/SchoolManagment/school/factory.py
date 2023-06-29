@@ -17,7 +17,7 @@ class StudentFactory(DjangoModelFactory):
     address = SubFactory(lambda: AddressFactory())
     email = LazyAttribute(lambda o: '%s@example.com' % o.name)
     teacher = SubFactory(lambda: TeacherFactory())
-    _class = SubFactory(lambda: ClassFactory())
+    class_ = SubFactory(lambda: ClassFactory())
 
 
 class AddressFactory(DjangoModelFactory):
