@@ -1,0 +1,31 @@
+
+{% load static %}
+<! DOCTYPE html >
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Django Custom Auth{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            {% if user.has_perm('custom_auth.view_post') %}
+                <a href="/posts/">Posts</a>
+            {% endif %}
+            {% if user.has_perm('custom_auth.add_post') %}
+                <a href="/posts/new/">New Post</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
