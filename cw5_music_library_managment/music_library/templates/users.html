@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{%block content%}
+    <div class="d-flex col-8 justify-content-center">
+    <table class="table table-bordered col-8">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Username</th>
+            <th scope="col">Detail</th>
+
+          </tr>
+        </thead>
+        
+        <tbody>
+        {% for user in users %}
+          <tr>
+            <th scope="row">{{user.id}}</th>
+            <td>{{user.first_name}} {{user.last_name}}</td>
+            <td>{{user.username}}</td>
+            <td><a href="{{ user.get_absolute_url }}" class="btn btn-light">user info</a></td>
+          </tr>
+          {%endfor%}
+        </tbody>
+        
+      </table>
+    </div>
+{%endblock%}

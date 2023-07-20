@@ -1,26 +1,30 @@
 from django.db import models
 
-GENDER = [("F", "FEMALE"), ("M", "MALE")]
-ATTENDANCE_STATUS = [("PRESENT", "present"), ("ABSENT", "absent")]
+# GENDER = [("F", "FEMALE"), ("M", "MALE")]
+# ATTENDANCE_STATUS = [("PRESENT", "PRESENT"), ("ABSENT", "ABENT")]
 
 
-class GenderChoice(models.TextChoices):#it can inherit intChoices
-    FEMALE = ("F", "FEMALE")#first in db
+class GenderChoice(models.TextChoices):  # it can inherit intChoices
+    FEMALE = ("F", "FEMALE")  # first in db
     MALE = "M", "MALE"
 
-class FloatChoices(float,models.Choices):
+
+class FloatChoices(float, models.Choices):
     ...
 
 
 class Student(models.Model):
     name = models.CharField("name of the student", max_length=100)
-    roll_number = models.CharField("roll of the student", max_length=10, unique=True)
+    roll_number = models.CharField(
+        "roll of the student", max_length=10, unique=True)
     date_of_birth = models.DateField("birthdate of the student")
-    gender = models.CharField("gender of the student", choices=GenderChoice.choices,default=GenderChoice.FEMALE, max_length=1)
+    gender = models.CharField(
+        "gender of the student", choices=GenderChoice.choices, default=GenderChoice.FEMALE, max_length=1)
     address = models.TextField("the address of the student")
     email = models.EmailField("email address of the student", unique=True)
-    teacher = models.ForeignKey("Teacher", on_delete=models.CASCADE, related_name="students")
-    class_ = models.OneToOneField("Class", on_delete=models.CASCADE)
+    teacher = models.ForeignKey(
+        "Teacher", on_delete=models.CASCADE, related_name="students")
+    student_class = models.OneToOneField("Class", on_delete=models.CASCADE)
 
     # _class = models.ForeignKey("Class", on_delete=models.CASCADE, related_name="student", unique=True)
 
@@ -42,9 +46,11 @@ class Address(models.Model):
 class Teacher(models.Model):
     name = models.CharField("name of the teacher", max_length=100)
     # subject = models.CharField("the subject taught by the teacher", required=True, max_length=100)
-    subject = models.ForeignKey("Subject", on_delete=models.CASCADE, related_name="teachers")
+    subject = models.ForeignKey(
+        "Subject", on_delete=models.CASCADE, related_name="teachers")
     date_of_birth = models.DateField("birthdate of the teacher")
-    gender = models.CharField("gender of the teacher", choices=GENDER, max_length=10)
+    gender = models.CharField(
+        "gender of the teacher", choices=GenderChoice.choices, default=GenderChoice.FEMALE, max_length=10)
     address = models.TextField("address of the teacher")
     email = models.EmailField("email address of the teacher", unique=True)
 
@@ -53,8 +59,10 @@ class Teacher(models.Model):
 
 
 class Class(models.Model):
-    name = models.CharField("name of the class(e.g.,\"Grade 10\")", max_length=100)
-    section = models.CharField("section of the class(e.g.,\"A\", \"B\")", max_length=100)
+    name = models.CharField(
+        "name of the class(e.g.,\"Grade 10\")", max_length=100)
+    section = models.CharField(
+        "section of the class(e.g.,\"A\", \"B\")", max_length=100)
     start_time = models.TimeField("start time of the class")
     end_time = models.TimeField("end time of the class")
     teacher = models.OneToOneField(Teacher, on_delete=models.CASCADE)
@@ -83,16 +91,21 @@ class Exam(models.Model):
 class Result(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    marks = models.IntegerField("marks obtained by the student")  # should not be list?
+    marks = models.IntegerField(
+        "marks obtained by the student")  # should not be list?
 
     def __str__(self):
         return f'{self.marks}'
 
 
 class Attendance(models.Model):
+    class AttendanceStatus(models.TextChoices):  # it can inherit intChoices
+        PRESENT = "P", "PRESENT"
+        ABSENT = "A", "ABENT"
     date = models.DateField("date for whitch the attendance is recorded")
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    status = models.CharField("attendance status", choices=ATTENDANCE_STATUS, max_length=10)
+    status = models.CharField("attendance status", choices=AttendanceStatus.choices,
+                              default=AttendanceStatus.ABSENT, max_length=10)
 
     def __str__(self):
         return f'{self.status}'
@@ -100,7 +113,8 @@ class Attendance(models.Model):
 
 class Assignment(models.Model):
     title = models.CharField("title of the assignment", max_length=100)
-    description = models.TextField("description/instructions for the assignment")
+    description = models.TextField(
+        "description/instructions for the assignment")
     due_date = models.DateField("due date for the assignment")
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
@@ -121,7 +135,8 @@ class LibraryBook(models.Model):
     title = models.CharField("title of the book", max_length=100)
     author = models.CharField("author of the book", max_length=100)
     publication_date = models.DateField(" publication date of the book")
-    availability_status = models.BooleanField("availability status of the book")
+    availability_status = models.BooleanField(
+        "availability status of the book")
 
     def __str__(self):
         return f'{self.title}'

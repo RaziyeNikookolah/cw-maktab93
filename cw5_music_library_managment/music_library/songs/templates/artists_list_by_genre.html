@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Search result{% endblock %}
+
+{%block content%}
+    <h3>
+      Genre: {{genre}}
+    </h3>
+    <div class="d-flex col-8 justify-content-center">
+    <table class="table table-bordered col-8">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+        {% for artist in artists %}
+          <tr>
+            <td>{{artist.name}}</td>
+          </tr>
+          {%endfor%}
+        </tbody>
+        
+      </table>
+    </div>
+{%endblock%}
